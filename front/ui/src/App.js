@@ -1,4 +1,4 @@
-import logo from './hinh.jpg';
+import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -7,10 +7,10 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Tuc tung ngu nhon nha
+          Reactjs deployed r nha
         </p>
         <p>
-          Yeu em nhieu nhieu
+          Haha
         </p>
       </header>
     </div>
