@@ -19,7 +19,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    return 'Hello, World!'
+    return 'First ecomm-app api'
 
 
 if __name__ == '__main__':
