@@ -31,8 +31,6 @@ paths:
     get:
       description: "Get store info."
       operationId: "getStoreInfo"
-      produces:
-      - "application/json"
       responses:
         200:
           description: "Echo"
@@ -42,20 +40,18 @@ paths:
       - api_key: []
     post:
       summary: "Add a new store info"
-      description: ""
+      description: "Add store info into BQ"
       operationId: "addStoreInfo"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
       parameters:
       - in: "body"
         name: "body"
         description: "Store info"
-        required: true
         type: "object"
         schema:
           type: "object"
+          required:
+          - storeName
+          - address
           properties:
             storeName:
               type: "string"
