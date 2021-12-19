@@ -1,0 +1,86 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# [START swagger]
+swagger: "2.0"
+info:
+  description: "Ecomm App config for GCP Endpoints."
+  title: "Endpoints Ecomm App"
+  version: "1.0.0"
+host: "ecomm-app-123.appspot.com"
+# [END swagger]
+consumes:
+- "application/json"
+produces:
+- "application/json"
+schemes:
+- "https"
+paths:
+  "/store":
+    get:
+      description: "Get store info."
+      operationId: "getStoreInfo"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Echo"
+          schema:
+            $ref: "#/definitions/Store"
+      security:
+      - api_key: []
+    post:
+      summary: "Add a new store info"
+      description: ""
+      operationId: "addStoreInfo"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Store info"
+        required: true
+        type: "object"
+        properties:
+          storeName:
+            type: "string"
+          address:
+            type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+        "405":
+          description: "Invalid input"
+      security:
+      - api_key: []
+
+definitions:
+  Store:
+    type: "object"
+    properties:
+      storeId:
+        type: "string"
+      storeName:
+        type: "string"
+      address:
+        type: "string"
+# [START securityDef]
+securityDefinitions:
+  # This section configures basic authentication with an API key.
+  api_key:
+    type: "apiKey"
+    name: "key"
+    in: "query"
