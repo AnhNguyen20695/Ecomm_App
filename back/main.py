@@ -58,9 +58,7 @@ def getStoreInfo():
 
 @app.route('/store', methods=['POST'])
 def addStoreInfo():
-    if not request.json \
-        or not 'store_name' in request.json
-        or not 'address' in request.json:
+    if not request.json or not 'store_name' in request.json or not 'address' in request.json:
         abort(405)
 
     store_name = request.json['store_name']
