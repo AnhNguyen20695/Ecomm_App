@@ -38,29 +38,29 @@ paths:
             $ref: "#/definitions/Store"
       security:
       - api_key: []
-    post:
-      summary: "Add a new store info"
-      description: "Add store info into BQ"
-      operationId: "addStoreInfo"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Store info"
-        type: "object"
-        required: true
-        schema:
-          $ref: "#/definitions/AddStore"
-      responses:
-        "200":
-          description: "successful operation"
-        "405":
-          description: "Invalid input"
-      security:
-      - api_key: []
+    # post:
+    #   summary: "Add a new store info"
+    #   description: "Add store info into BQ"
+    #   operationId: "addStoreInfo"
+    #   consumes:
+    #   - "application/json"
+    #   produces:
+    #   - "application/json"
+    #   parameters:
+    #   - in: "body"
+    #     name: "body"
+    #     description: "Store info"
+    #     type: "object"
+    #     required: true
+    #     schema:
+    #       $ref: "#/definitions/AddStore"
+    #   responses:
+    #     "200":
+    #       description: "successful operation"
+    #     "405":
+    #       description: "Invalid input"
+    #   security:
+    #   - api_key: []
 
 definitions:
   Store:
