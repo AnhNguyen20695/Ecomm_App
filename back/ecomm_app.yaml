@@ -19,6 +19,7 @@ runtime: python39
 # [END gae_python3_custom_runtime]
 # [END gae_python38_custom_runtime]
 automatic_scaling:
+  min_instances: 1
   max_instances: 1
 handlers:
 - url: /.*
