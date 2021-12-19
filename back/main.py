@@ -29,62 +29,67 @@ credentials = service_account.Credentials.from_service_account_file(
 app = Flask(__name__)
 
 
-@app.route('/store', methods=['GET'])
-def getStoreInfo():
-    client = bigquery.Client(credentials=credentials, project=credentials.project_id)
-    query_job = client.query(
-    """
-        SELECT
-            store_id,
-            store_name,
-            address
-        FROM `ecomm-app-123.store.info`
-        WHERE created_date > '2021-12-13'
-        ORDER BY created_date DESC
-        LIMIT 10"""
-    )
+# @app.route('/store', methods=['GET'])
+# def getStoreInfo():
+#     client = bigquery.Client(credentials=credentials, project=credentials.project_id)
+#     query_job = client.query(
+#     """
+#         SELECT
+#             store_id,
+#             store_name,
+#             address
+#         FROM `ecomm-app-123.store.info`
+#         WHERE created_date > '2021-12-13'
+#         ORDER BY created_date DESC
+#         LIMIT 10"""
+#     )
 
-    results = query_job.result()
-    latest_store_info = results.head(1)
-    store_id = str(latest_store_info['store_id'])
-    store_name = str(latest_store_info['store_name'])
-    address = str(latest_store_info['address'])
-    return jsonify({
-        'store_id': store_id,
-        'store_name': store_name,
-        'address': address
-    }), 200
+#     results = query_job.result()
+#     latest_store_info = results.head(1)
+#     store_id = str(latest_store_info['store_id'])
+#     store_name = str(latest_store_info['store_name'])
+#     address = str(latest_store_info['address'])
+#     return jsonify({
+#         'store_id': store_id,
+#         'store_name': store_name,
+#         'address': address
+#     }), 200
 
 
-@app.route('/store', methods=['POST'])
-def addStoreInfo():
-    if not request.json or not 'store_name' in request.json or not 'address' in request.json:
-        abort(405)
+@app.route('/', methods=['GET'])
+def main():
+    return 'main path'
 
-    store_name = request.json['store_name']
-    address = request.json['address']
-    created_date = datetime.today().strftime('%Y-%m-%d')
 
-    # Hash store_id based on current time
-    k = str(time.time()).encode('utf-8')
-    h = blake2b(key=k, digest_size=16)
-    store_id = h.hexdigest()
+# @app.route('/store', methods=['POST'])
+# def addStoreInfo():
+#     if not request.json or not 'store_name' in request.json or not 'address' in request.json:
+#         abort(405)
 
-    client = bigquery.Client(credentials=credentials, project=credentials.project_id)
-    query_job = client.query(
-    """
-        INSERT INTO `ecomm-app-123.store.info` (store_id, store_name, address, created_date)
-        VALUES (%(store_id)s, %(store_name)s, %(address)s, %(created_date)s)
-    """ % {
-            'store_id': store_id,
-            'store_name': store_name,
-            'address': address,
-            'created_date': created_date
-        }
-    )
+#     store_name = request.json['store_name']
+#     address = request.json['address']
+#     created_date = datetime.today().strftime('%Y-%m-%d')
 
-    results = query_job.result()
-    return 200
+#     # Hash store_id based on current time
+#     k = str(time.time()).encode('utf-8')
+#     h = blake2b(key=k, digest_size=16)
+#     store_id = h.hexdigest()
+
+#     client = bigquery.Client(credentials=credentials, project=credentials.project_id)
+#     query_job = client.query(
+#     """
+#         INSERT INTO `ecomm-app-123.store.info` (store_id, store_name, address, created_date)
+#         VALUES (%(store_id)s, %(store_name)s, %(address)s, %(created_date)s)
+#     """ % {
+#             'store_id': store_id,
+#             'store_name': store_name,
+#             'address': address,
+#             'created_date': created_date
+#         }
+#     )
+
+#     results = query_job.result()
+#     return 200
 
 
 if __name__ == '__main__':
