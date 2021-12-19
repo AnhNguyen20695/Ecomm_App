@@ -54,11 +54,13 @@ paths:
         description: "Store info"
         required: true
         type: "object"
-        properties:
-          storeName:
-            type: "string"
-          address:
-            type: "string"
+        schema:
+          type: "object"
+          properties:
+            storeName:
+              type: "string"
+            address:
+              type: "string"
       responses:
         "200":
           description: "successful operation"
