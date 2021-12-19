@@ -21,6 +21,3 @@ runtime: python39
 automatic_scaling:
   min_instances: 1
   max_instances: 1
-handlers:
-- url: /.*
-  script: main.app
