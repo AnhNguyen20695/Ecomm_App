@@ -42,21 +42,18 @@ paths:
       summary: "Add a new store info"
       description: "Add store info into BQ"
       operationId: "addStoreInfo"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
       parameters:
       - in: "body"
         name: "body"
         description: "Store info"
         type: "object"
+        required: true
         schema:
-          type: "object"
-          required:
-          - storeName
-          - address
-          properties:
-            storeName:
-              type: "string"
-            address:
-              type: "string"
+          $ref: "#/definitions/AddStore"
       responses:
         "200":
           description: "successful operation"
@@ -71,6 +68,13 @@ definitions:
     properties:
       storeId:
         type: "string"
+      storeName:
+        type: "string"
+      address:
+        type: "string"
+  AddStore:
+    type: "object"
+    properties:
       storeName:
         type: "string"
       address:
