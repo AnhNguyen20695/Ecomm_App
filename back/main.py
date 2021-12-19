@@ -29,7 +29,8 @@ credentials = service_account.Credentials.from_service_account_file(
 app = Flask(__name__)
 
 
-@app.route('/store', methods=['GET'])
+# @app.route('/store', methods=['GET'])
+@app.route('/store/info')
 def getStoreInfo():
     client = bigquery.Client(credentials=credentials, project=credentials.project_id)
     query_job = client.query(
