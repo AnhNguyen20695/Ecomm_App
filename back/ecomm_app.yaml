@@ -23,6 +23,6 @@ automatic_scaling:
   min_idle_instances: 1
   max_idle_instances: 1
   max_instances: 1
-endpoints_api_service:
-  name: ecomm-app-123.appspot.com
-  rollout_strategy: managed
+# endpoints_api_service:
+#   name: ecomm-app-123.appspot.com
+#   rollout_strategy: managed

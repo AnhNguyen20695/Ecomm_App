@@ -43,7 +43,8 @@ def storeInfo():
         FROM `ecomm-app-123.store.info`
         WHERE created_date > '2021-12-13'
         ORDER BY created_date DESC
-        LIMIT 1"""
+        LIMIT 1
+    """
     )
 
     results = query_job.result()
@@ -86,8 +87,11 @@ def addStore():
         }
     )
 
-    results = query_job.result()
-    return 200
+    return jsonify({
+        'store_name': store_name,
+        'address': address,
+        'status': 'successfully added'
+    }), 200
 
 
 if __name__ == '__main__':
